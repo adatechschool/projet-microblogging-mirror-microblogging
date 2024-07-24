@@ -1,6 +1,6 @@
 # Plateforme de micro-blogging
 
-## Pré-requis : espace disque
+## Pré-requis : espace disque :p 
 
 🟡 Cette installation va mobiliser de l'ordre de 20Go d'espace disque sur votre machine. 
 
