@@ -17,3 +17,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/.devcontainer/devcontainer.json
+/.devcontainer/docker-compose.yml
+/.github/dependabot.yml
