@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,18 @@ Route::middleware('auth')->group(function () {
 
 
 
+
+
 require __DIR__.'/auth.php';
+
+Route::get('/yourPage', function(){
+    return view('yourPage');
+})->name('yourPage.view');
+
+Route::get('/create-post', function () {
+    $post = new Post();
+    $post->title = 'Mon premier article';
+    $post->content = 'Mon contenu';
+    $post->save();
+    return $post;
+});
