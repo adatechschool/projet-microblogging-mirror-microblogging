@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
-use App\Models\Post;
+use App\Models\Post, App\Models\User;
+use App\Http\Controllers\PostController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +23,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $posts = Post::all();
+    $users = User::all();
+    $categories = Category::all();
+        return view('dashboard',compact('posts') , compact('users') , compact('categories'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -35,9 +41,14 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+
 Route::get('/yourPage', function(){
-    return view('yourPage');
+    $posts = Post::all();
+    $users = User::all();
+    $categories = Category::all();
+    return view('yourPage', compact('posts', 'users', 'categories'));
 })->name('yourPage.view');
+
 
 Route::get('/create-post', function () {
     $post = new Post();
@@ -46,3 +57,6 @@ Route::get('/create-post', function () {
     $post->save();
     return $post;
 });
+
+Route::post('/yourPage', [PostController::class, 'store'])->name('posts.store');
+

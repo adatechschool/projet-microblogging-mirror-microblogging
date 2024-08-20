@@ -835,11 +835,56 @@
 
     <body class="font-sans antialiased">
         <main>
-            <div>
-                <x-input-label for="PostContent" :value="__('longText')" />
-                <x-text-input id="PostContent" class="block mt-1 w-full" type="longText" name="PostContent" />
 
-            </div>
+        <div class='my-5'>
+        @foreach ($errors->all() as $error)
+            <span class='block text-red-500'>{{$error}}</span>
+        @endforeach
+       </div>
+            
+       <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+
+    <!-- Title -->
+    <div class="mb-4">
+        <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+        <input type="text" name="title" id="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+    </div>
+
+    <!-- Content -->
+    <div class="mb-4">
+        <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
+        <textarea name="content" id="content" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+    </div>
+
+    <!-- Category -->
+    <div class="mb-4">
+        <label for="category_id" class="block text-gray-700 text-sm font-bold mb-2">Category:</label>
+        <select name="category_id" id="category_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <!-- Image -->
+    <div class="mb-4">
+        <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
+        <input type="file" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex items-center justify-between">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Submit Post
+        </button>
+    </div>
+</form>
+
+</div>
+       
+
+
 
 
         </main>
